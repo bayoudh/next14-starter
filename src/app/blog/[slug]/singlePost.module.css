@@ -2,7 +2,11 @@
     display: flex;
     gap: 100px;
   }
-  
+  .avatar{
+    object-fit: cover;
+    width: 50px;
+    border-radius: 50%;
+  }
   .imgContainer {
     flex: 1;
     position: relative;

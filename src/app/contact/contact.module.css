@@ -29,7 +29,8 @@
     outline: none;
     background-color: var(--bgSoft);
     color: var(--text);
-    width: 500px;
+    width: 400px;
+    
    
 }
 .form button{
@@ -39,4 +40,18 @@
     font-weight: bold;
     border: 5px;
     cursor: pointer;
+}
+@media (max-width:1024px) {
+    .container{
+       flex-direction: column;
+       gap:0 ;
+    }
+    
+}
+@media (max-width:768px) {
+    .container{
+       flex-direction: column;
+       gap:0 ;
+    }
+    
 }

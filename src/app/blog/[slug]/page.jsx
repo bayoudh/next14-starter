@@ -9,7 +9,7 @@ const SinglePostPage=()=>{
             <div className={styles.textContainer}>
                 <h1 className={styles.title}>Title</h1>
                 <div className={styles.detail}>
-                     <Image src="https://images.pexels.com/photos/19342868/pexels-photo-19342868/free-photo-of-rhume-froid-neige-voitures.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt='' fill className={styles.avatar}/>
+                 <Image width={50} height={50} src="https://images.pexels.com/photos/19342868/pexels-photo-19342868/free-photo-of-rhume-froid-neige-voitures.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=''  className={styles.avatar}/>
                     <div className={styles.detailText}>
                         <span className={styles.detailTitle}>Author</span>
                         <span className={styles.detailValue}>Terry Jefferson</span>
