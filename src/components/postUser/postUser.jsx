@@ -15,10 +15,21 @@ const PostUser = async ({ userid })=>{
     const user= await getUser(userid)
     
     return(
-        <div className={styles.container}>
-                        <span className={styles.title}>{user.name}</span>
-                        <span className={styles.username}>{user.username}</span>
+        
+       <div className={styles.container}>
+                           <Image 
+                            width={50} 
+                            height={50} 
+                            src={user?.img ? user.img: "/noavatar.png"}
+                            alt="" 
+                            className={styles.avatar} 
+                        />
+                        <div className={styles.texts}>
+                            <span className={styles.title}>Author</span>
+                            <span className={styles.username}>{user?.username ?? "Unknown"}</span>
+                        </div>
         </div>
+      
     )
 }
 export default PostUser;
