@@ -3,7 +3,8 @@ import { useState } from "react";
 import style from "./link.module.css"
 import NavLink from "./navLink/navLink";
 import Image from "next/image";
-const Links =()=>{
+import { handleLogout } from "@/lib/acton";
+const Links =({session})=>{
     const[open,setOpen] = useState(false);
     const Links=[
         {
@@ -24,7 +25,7 @@ const Links =()=>{
         },
     ];
     //TEMPRAY
-    const session =true
+
     const isAdmin=false
     return(
         <div className={style.container}>
@@ -33,16 +34,19 @@ const Links =()=>{
                 <NavLink item={link}  key={link.title}/>
                 
             )))}{
-                session ? (
+                session?.user ? (
                     <>
-                    {isAdmin && (<NavLink item={{title:"Admin",path:"/admin"}} /> )}
-                    <button className={style.logout}>Logout</button>
+                    {session.user?.isAdmin && (<NavLink item={{title:"Admin",path:"/admin"}} /> )}
+                    <form action={handleLogout}>
+                     <button className={style.logout}>Logout</button>
+                    </form>
                     </>
 
                     ):(
                         <NavLink item={{title:"Login",path:"/login"}}/>
                     )
             }
+                
         </div>
       
         <Image src="/menu.png" className={style.menuButton}  alt="" width={30} height={30} onClick={() => setOpen((prev) => !prev)}/>
