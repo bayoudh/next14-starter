@@ -91,19 +91,15 @@ export const handleLogout = async () => {
   const { username, password } = Object.fromEntries(formData);
 
   try {
-    await signIn("credentials", {
-      redirect: false,
-      username,
-      password
-    });
+    await signIn("credentials", { username, password });
   } catch (err) {
     console.log(err);
 
     if (err.message.includes("CredentialsSignin")) {
       return { error: "Invalid username or password" };
     }
-    // Handle other possible errors
-    return { error: "An unexpected error occurred" };
+    throw err;
   }
 };
+
  

@@ -3,7 +3,7 @@ import styles from "./login.module.css";
 import LoginForm from "@/components/loginForm/loginForm";
 import Image from "next/image";
  const LoginPage =()=>{
-    
+    //auth?.user?.isAdmin && router.push("/");
     
     return(
         <div className={styles.container}>
