@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
-import { signIn, signOut } from "./auth";
+import {  signIn,signOut } from "./auth";
+
 import bcrypt from "bcryptjs";
 
 export const addPost = async (prevState,formData) => {
@@ -11,7 +12,7 @@ export const addPost = async (prevState,formData) => {
   // const desc = formData.get("desc");
   // const slug = formData.get("slug");
 
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
+  const { title, desc, slug,img, userId } = Object.fromEntries(formData);
 
   try {
     connectToDb();
@@ -19,6 +20,7 @@ export const addPost = async (prevState,formData) => {
       title,
       desc,
       slug,
+      img,
       userId,
     });
 
@@ -49,15 +51,17 @@ export const deletePost = async (formData) => {
 };
 
 export const addUser = async (prevState,formData) => {
-  const { username, email, password, img } = Object.fromEntries(formData);
-
+  const { username, email, password, img,isAdmin} = Object.fromEntries(formData);
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
   try {
     connectToDb();
     const newUser = new User({
       username,
       email,
-      password,
+      password:hashedPassword,
       img,
+      isAdmin,
     });
 
     await newUser.save();
@@ -143,6 +147,37 @@ export const login = async (prevState, formData) => {
     if (err.message.includes("CredentialsSignin")) {
       return { error: "Invalid username or password" };
     }
-    throw err;
+    console.error('Unexpected error:', err.message);
+    return { error: "An unexpected error occurred" };
   }
 };
+/*export const login = async (prevState, formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    // Attempt to sign in using credentials provider
+    const result = await signIn('credentials', {
+      redirect: false,
+      username,
+      password,
+    });
+
+    if (result?.error) {
+      // Handle sign-in error
+      console.log('Sign-in error:', result.error);
+      if (result.error.includes("CredentialsSignin")) {
+        return { error: "Invalid username or password" };
+      }
+      return { error: "An unexpected error occurred" };
+    }
+
+    // Handle successful sign-in
+    if (result?.ok) {
+      console.log('Sign-in successful');
+      return { success: true };
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err.message);
+    return { error: "An unexpected error occurred" };
+  }
+};*/

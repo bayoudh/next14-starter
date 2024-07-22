@@ -53,10 +53,11 @@ export const {
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account.provider === "github") {
-        connectToDb();
+        await connectToDb();
         try {
+         
           const user = await User.findOne({ email: profile.email });
-
+         
           if (!user) {
             const newUser = new User({
               username: profile.login,
@@ -66,6 +67,9 @@ export const {
 
             await newUser.save();
           }
+         
+      
+
         } catch (err) {
           console.log(err);
           return false;
