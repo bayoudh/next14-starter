@@ -1,5 +1,5 @@
 
-import { addPost,deletePost } from "@/lib/acton";
+import { addPost,deletePost } from "@/lib/action";
 
 
 const ServerActionTestPage=()=>{

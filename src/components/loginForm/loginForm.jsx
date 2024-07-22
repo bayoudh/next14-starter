@@ -1,5 +1,5 @@
 "use client"
-import { login } from "@/lib/acton";
+import { login } from "@/lib/action";
 import styles from "./loginForm.module.css";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";

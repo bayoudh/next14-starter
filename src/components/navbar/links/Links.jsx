@@ -3,7 +3,7 @@ import { useState } from "react";
 import style from "./link.module.css"
 import NavLink from "./navLink/navLink";
 import Image from "next/image";
-import { handleLogout } from "@/lib/acton";
+import { handleLogout } from "@/lib/action";
 const Links =({session})=>{
     const[open,setOpen] = useState(false);
     const Links=[
